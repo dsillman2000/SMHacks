@@ -3,15 +3,48 @@
 ##Account API
 ###POST /account/register
 Register for a new account
+Parameters:
+email - string - user's email
+username - string - user's requested username
+password - string - user's requested password
+Response:
+{
+    success: boolean,
+    accountID: user's assigned ID,
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),
+}
 
 ###POST /account/login
 Authenticate existing account
+Parameters:
+username - string - user's email or username
+password - string - user's password
+Response:
+{
+    success: boolean,
+    accountID: users's assigned ID,
+    session: session string,
+    error: if success false, type of error (nosuchuser, invalidpassword)
+}
 
-###POST /account/update
+###POST /account/update/accountID
 Update account details
+TODO
 
 ###POST /acccount/info/accountID
 Get info for given account or own account
+Parameters:
+accountID: ID of account to get info for,
+session: session string
+Response:
+{
+    success: true,
+    error: if success false, which error (nosuchuser)
+    username: username of account,
+    email: email of account,
+    desc: description of account,
+    image: imageURL for the account
+}
 
 
 
