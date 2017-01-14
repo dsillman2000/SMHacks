@@ -1,29 +1,38 @@
 #Specifications for the REST API that drives Socratik
 
 ##Account API
+###User object
+{
+    id: int,
+    firstname: string,
+    lastname: string,
+    password: string (hash),
+    desc: string
+}
+
 ###POST /account/register
 Register for a new account
 Parameters:
 email - string - user's email
-username - string - user's requested username
+firstname - string - user's first name
+lastname - string - user's last name
 password - string - user's requested password
 Response:
 {
     success: boolean,
-    accountID: user's assigned ID,
+    id: user's assigned ID,
     error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),
 }
 
 ###POST /account/login
 Authenticate existing account
 Parameters:
-username - string - user's email or username
+email - string - user's email
 password - string - user's password
 Response:
 {
     success: boolean,
-    accountID: users's assigned ID,
-    session: session string,
+    id: users's assigned ID,
     error: if success false, type of error (nosuchuser, invalidpassword)
 }
 
@@ -35,7 +44,6 @@ TODO
 Get info for given account or own account
 Parameters:
 accountID: ID of account to get info for,
-session: session string
 Response:
 {
     success: true,
