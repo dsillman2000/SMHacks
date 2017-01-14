@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Soctratik Register Test Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <form>
+        <input id="email" type="email" placeholder="Email"/>
+        <input id="password" type="password" placeholder="Password"/>
+        <input id="firstname" type="text" placeholder="First Name"/>
+        <input id="lastname" type="text" placeholder="Last Name"/>
+        <input id="login" type="button" value="Login" />
+    </form>
+</body>
+
+<style>
+
+</style>
+
+<script>
+    $(document).ready(function() {
+        $('#login').click(function() {
+            $.post("/api/v1/account/register", {
+                email: $('#email').val(),
+                password: $('#password').val(),
+                firstname: $('#firstname').val(),
+                lastname: $('#lastname').val()
+            }, function(data, status) {
+                console.log(data);
+            });
+        });
+    });
+</script>
+
+</html>
