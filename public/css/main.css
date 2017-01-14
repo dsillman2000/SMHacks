@@ -1,6 +1,6 @@
 body.blue {
     background-color: #88AAFF;
-    font-family: 'HelveticaNeueThin';
+    font-family: HelveticaNeueThin;
     color: #DDD
 }
 body.purple {
@@ -10,14 +10,14 @@ body.purple {
 }
 body.unfilled {
     background-color:#DDD;
-    font-family:'HelveticaNeueLt';
+    font-family:"HelveticaNeueLt";
     color: #333
 }
 @font-face{
     font-family: 'HelveticaNeueThin';
-    src: url('fonts/HelveticaNeueThin.tff');
+    src: url("/css/fonts/HelveticaNeueThin.ttf");
 }
 @font-face{
-    font-family: 'HelveticaNeueLt';
-    src: url('fonts/HelveticaNeueLt.tff');
+    font-family: HelveticaNeueLt;
+    src: local('fonts/HelveticaNeueLt.tff');
 }
