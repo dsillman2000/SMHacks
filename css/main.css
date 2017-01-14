@@ -1,0 +1,18 @@
+filledBody {
+    background-color: #9955FF;
+    font-family: 'HelveticaNeueThin';
+    color: #DDD
+}
+unfilledBody {
+    background-color:#DDD;
+    font-family:'HelveticaNeueLt';
+    color: #333
+}
+@font-face{
+    font-family: 'HelveticaNeueThin';
+    src: url('fonts/HelveticaNeueThin.tff');
+}
+@font-face{
+    font-family: 'HelveticaNeueLt';
+    src: url('fonts/HelveticaNeueLt.tff');
+}
