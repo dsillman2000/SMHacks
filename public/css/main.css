@@ -1,9 +1,14 @@
-filledBody {
+body.purple {
+    background-color: #88AAFF;
+    font-family: 'HelveticaNeueThin';
+    color: #DDD
+}
+body.blue {
     background-color: #9955FF;
     font-family: 'HelveticaNeueThin';
     color: #DDD
 }
-unfilledBody {
+body.unfilled {
     background-color:#DDD;
     font-family:'HelveticaNeueLt';
     color: #333
