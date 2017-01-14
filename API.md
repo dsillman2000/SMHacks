@@ -2,62 +2,62 @@
 
 ##Account API
 ###User object
-{ 
-    id: int, 
-    firstname: string, 
-    lastname: string, 
-    password: string (hash) 
-} 
+{  
+    id: int,  
+    firstname: string,  
+    lastname: string,  
+    password: string (hash)  
+}  
 
 ###POST /account/register
-Register for a new account 
-Parameters: 
-email - string - user's email 
-firstname - string - user's first name 
-lastname - string - user's last name 
-password - string - user's requested password 
-Response: 
-{ 
-    success: boolean, 
-    id: user's assigned ID, 
-    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail), 
-} 
+Register for a new account  
+Parameters:  
+email - string - user's email  
+firstname - string - user's first name  
+lastname - string - user's last name  
+password - string - user's requested password  
+Response:  
+{  
+    success: boolean,  
+    id: user's assigned ID,  
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
+}  
 
 ###POST /account/login
-Authenticate existing account 
-Parameters: 
-email - string - user's email 
-password - string - user's password 
-Response: 
-{ 
-    success: boolean, 
-    id: users's assigned ID, 
-    error: if success false, type of error (nosuchuser, invalidpassword) 
-} 
+Authenticate existing account  
+Parameters:  
+email - string - user's email  
+password - string - user's password  
+Response:  
+{  
+    success: boolean,  
+    id: users's assigned ID,  
+    error: if success false, type of error (nosuchuser, invalidpassword)  
+}  
 
 ###POST /account/update/accountID
-Update account details 
-TODO 
+Update account details  
+TODO  
 
 ###POST /acccount/info/accountID
-Get info for given account or own account 
-Parameters: 
-accountID: ID of account to get info for, 
-Response: 
-{ 
-    success: true, 
-    error: if success false, which error (nosuchuser) 
-    userobject: userobject corresponding to given id 
-} 
+Get info for given account or own account  
+Parameters:  
+accountID: ID of account to get info for,  
+Response:  
+{  
+    success: true,  
+    error: if success false, which error (nosuchuser)  
+    userobject: userobject corresponding to given id  
+}  
 
 
 
 ##Group API
 ###Group object
-{
-    id: int,
-    desc: string,
-
+{  
+    id: int,  
+    desc: string,  
+    
 }
 
 ###POST /group/join/groupID
