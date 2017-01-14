@@ -1,4 +1,5 @@
 #Specifications for the REST API that drives Socratik
+Everything is behind /api/v1
 
 ##Account API
 ###User object
@@ -57,7 +58,7 @@ Response:
 {  
     id: int,  
     desc: string,  
-    
+
 }
 
 ###POST /group/join/groupID
