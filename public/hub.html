@@ -199,6 +199,13 @@ html, body {
     var questions;
 
     $(document).ready(function () {//call page with 
+        $.post("/api/v1/account/loggedin", function(data, status) {
+            console.log(data);
+            if (!data.success) {
+                console.log(data);
+                //window.location.replace("index.html");
+            }
+        });
         var url = window.location.href;
         groupID = url.slice(url.indexOf("?")).split('=')[1];
     })

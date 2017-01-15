@@ -52,6 +52,11 @@ Response:
     userobject: userobject corresponding to given id  
 }  
 
+###POST /account/loggedin
+Response {
+    success: true/false
+}
+
 
 
 ##Group API
