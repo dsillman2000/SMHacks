@@ -106,16 +106,19 @@ Response:
 
 ###POST /group/groupID/info/
 - Group Object
+TODO
 
 ###POST /group/groupID/update
 Update a given group
+TODO
 
 ###POST /group/groupID/remove
 Remove a given group
+TODO
 
 ###POST /group/list/userID
 Get available groups for a given user
-
+TODO
 
 ##Question API
 ###Question Object
@@ -147,6 +150,7 @@ Response:
 
 
 ###POST /group/groupID/questions/new
+Create a new question
 Parameters:
 question: String
 Response:
@@ -155,7 +159,6 @@ Response:
     id: question's assigned ID,  
     error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
 }
-Ask a question
 
 ###POST /question/update
 Update a question
