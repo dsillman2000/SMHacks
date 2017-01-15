@@ -1,0 +1,44 @@
+<html>
+	<head>
+		
+	</head>
+	<body>
+		
+		<button id="new">test</button>
+		<div id="test"></div>
+	</body>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+	<script src="/socket.io/socket.io.js"></script>
+		
+	<script>
+
+
+var group = 'testgroup';
+
+var socket = io();
+
+socket.on('init', function() {
+	socket.emit('mygroup', group);
+});
+
+socket.on('message', function(data) {
+	$("#test").append("<p>" + data.message + "</p>");
+	
+});
+
+$(document).ready(function() {
+	
+	$('#new').click(function(e) {
+		e.preventDefault();
+		
+		socket.emit('chat message', 'This is a test message', group);
+	});
+	
+	
+});
+
+
+	</script>
+</html>

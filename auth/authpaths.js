@@ -3,9 +3,13 @@ module.exports = function(app, passport) {
 
   // route to test if the user is logged in or not
   app.get('/api/v1/account/loggedin', function(req, res) {
-    console.log("User is loggged in? " + (req.isAuthenticated() ? "Yes - username: " + req.user.email : "No"));
-//    if (req.user) req.user.password = undefined;
-    res.json({ success: req.isAuthenticated() });
+    if (req.user) {
+      console.log("User is loggged in? " + (req.isAuthenticated() ? "Yes - username: " + req.user.email : "No"));
+  //    if (req.user) req.user.password = undefined;
+      res.json({ success: req.isAuthenticated(), id: req.user.id });
+    } else {
+      res.json({ success: false });
+    }
   });
 
   // route to log in

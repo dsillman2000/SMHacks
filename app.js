@@ -1,5 +1,5 @@
 var express = require('express');
-// var http = require('http');
+var http = require('http');
 var path = require('path');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -63,14 +63,14 @@ mongoose.Promise = global.Promise;
 //assert.equal(query.exec().constructor, global.Promise);
 mongoose.connect('mongodb://socratik:verysecure@ds111479.mlab.com:11479/socratik');
 
-
-app.use(session({
+var expressSession = session({
   key: 'mysecurekey',
 	secret: 'n5dQg3Tgc0kfd03e',
 //  store: sessionStore,
 	resave: true,
 	saveUninitialized: true
-})); 
+})
+app.use(expressSession); 
 
 app.use(passport.initialize()); // Add passport initialization
 app.use(passport.session());    // Add passport initialization
@@ -90,7 +90,14 @@ app.use(function(req,res) {
 });
 
 //start the server
+
+var server = http.createServer(app);
+
 var port = process.env.PORT || 3000;
-app.listen(port, function() {
+server.listen(port, function() {
   console.log('...listening on port ' + port)
 });
+
+var io = require('socket.io')(http).listen(server);
+var chatSetup = require('./socket/socketSetup');
+chatSetup(io, expressSession, passport);

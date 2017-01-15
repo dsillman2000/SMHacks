@@ -65,7 +65,7 @@
     
     `};
     const Index = {template: `
-        <div>
+        <div><br>
         <div class="row">
         <div class="col-sm-8 offset-sm-2">
             <h1 class="text-center title">Welcome to <span class="bold">Socratik</span></h1>
@@ -144,21 +144,20 @@
     </div>
     `}
 
-    const routes = [
+    const router = new VueRouter({
+        routes: [
         { path: '/foo', component: Foo },
         { path: '/bar', component: Bar },
+        { path: '/groups', component: Groups },
         { path: '/index', component: Index}
-    ]
-
-    const router = new VueRouter({
-        routes // short for routes: routes
+    ] // short for routes: routes
     })
 
     const app = new Vue({
-        router
+        router: router,
     }).$mount('#app')
 
-    router.push('/index')
+    router.push('/index');
 
     $(document).ready(function () {
         $('#loginbutton').click(function (e) {
@@ -168,7 +167,7 @@
                 password: $('#loginpassword').val()
             }, function (data, status) {
                 console.log(data);
-                window.location.replace("/hub.html");
+                window.location.replace("/groups.html");
             });
         });
 
@@ -181,7 +180,7 @@
                 lastname: $('#registerlastname').val()
             }, function (data, status) {
                 console.log(data);
-                window.location.replace("/hub.html");
+                window.location.replace("/groups.html");
             });
         });
     });

@@ -10,6 +10,23 @@ Everything is behind /api/v1
     password: string (hash)  
 }  
 
+###POST /account/loggedin
+Check Logged in, get user object
+Response:  
+{  
+    success: boolean,  
+    id: users's assigned ID
+}  
+
+###POST /account/groups
+Check Logged in, get user groups
+Response:  
+{  
+    success: boolean,  
+    id: users's assigned ID
+    groups: [Group Object]
+}  
+
 ###POST /account/register
 Register for a new account  
 Parameters:  
@@ -125,6 +142,7 @@ TODO
 {
 	groupId: String,
 	question: String,
+    description: String,
 	user: {
 		userId: String,
 		firstName: String,
@@ -153,6 +171,7 @@ Response:
 Create a new question
 Parameters:
 question: String
+description: String
 Response:
 {  
     success: boolean,  

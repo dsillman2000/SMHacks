@@ -40,3 +40,39 @@ div.fullheight {
 img.hoverlight:hover{
     filter: brightness(1.1);
 }
+
+.user {
+    margin: 0px 15px;
+    text-align: center;
+}
+
+.user img {
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+    display:inline-block;
+}
+
+.user p {
+    margin: -5px 0px 0px;
+    padding: 0px;
+}
+
+p.questionbody {
+    color:#777;
+    font-size: 18px;
+    line-height: 1.1em;
+}
+
+body.fullheight {
+    overflow: hidden;
+}
+
+#scrollingpanel {
+    overflow-y: scroll;
+}
+
+#newquestion {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
