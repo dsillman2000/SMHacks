@@ -112,7 +112,10 @@ route.post('/:groupId/questions/create', function(req, res) {
   
   newQuestion.save(function(err) {
     if (err) res.json({ success: false, error: err });
-    else res.json({ success: true, id: newQuestion.id, error: err });
+    else {
+      console.log("[User] created question");
+      res.json({ success: true, id: newQuestion.id, error: err });
+    }
   });
   
 });

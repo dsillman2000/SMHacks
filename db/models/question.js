@@ -13,8 +13,6 @@ module.exports = mongoose.model('Question', {
 	comments: [{
 		comment: String,
 		date: Number,
-		userId: String,
-		firstName: String,
-		lastName: String
+		userId: String
 	}]
 });

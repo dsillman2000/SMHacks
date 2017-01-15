@@ -15,7 +15,7 @@
 	<script>
 
 
-var group = '587ba4870b6ad6acf9ebcbdc';
+var group = '587bb648b094e92cca5fdcee';
 
 var socket = io();
 
@@ -30,9 +30,7 @@ socket.on('init', function() {
 
 socket.on('message', function(data) {
 	$("#test").append("<p>" + data.message + "  from  " + data.userId + "</p>");
-	
 });
-
 
 
 $(document).ready(function() {
