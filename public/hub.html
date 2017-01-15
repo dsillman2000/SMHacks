@@ -345,7 +345,7 @@ html, body {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="answerdetails">Posted by POSTNAME at TIMEDATE</p>
+                            <p class="answerdetails">Posted by POSTNAME on TIMEDATE</p>
                         </div>
                     </div>
                 </td>
@@ -357,7 +357,8 @@ html, body {
                 break;
             }
         }
-        comment = comment.replace("LASTNAME", c.lastname);
+        comment = comment.replace("ANSWERBODY", c.comment);
+        comment = comment.replace("POSTNAME", name);
         var time = new Date(c.date);
         var opt = {
             weekday: "long",
