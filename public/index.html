@@ -121,6 +121,7 @@
                 password: $('#loginpassword').val()
             }, function(data, status) {
                 console.log(data);
+                window.location.replace("/hub.html");
             });
         });
 
@@ -133,6 +134,7 @@
                 lastname: $('#registerlastname').val()
             }, function(data, status) {
                 console.log(data);
+                window.location.replace("/hub.html");
             });
         });
     });
@@ -162,7 +164,6 @@
     
     .white {
         background-color: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(5px) grayscale(80%) brightness(80%);
     }
     
     .spacer {
