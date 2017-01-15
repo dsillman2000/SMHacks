@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Group', {
 	name: String,
-	desc: String,
+	description: String,
 	members: [{
 		id: mongoose.Schema.Types.ObjectId,
 		email: String,

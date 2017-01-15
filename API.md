@@ -59,7 +59,7 @@ Response:
 {  
     id: String,  
     name: String,
-	desc: String,
+	description: String,
 	members: [{
 		id: String,
 		email: String,
@@ -77,7 +77,16 @@ Response:
 Join a given group
 
 ###POST /group/create
-Create a group (if allowed)
+Create a new group
+Parameters:
+name: String,
+description: String
+Response:  
+{  
+    success: boolean,  
+    id: group's assigned ID,  
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
+}  
 
 ###POST /group/info/groupID
 - Group Object
