@@ -59,7 +59,7 @@ Response:
 {  
     id: String,  
     name: String,
-	desc: String,
+	description: String,
 	members: [{
 		id: String,
 		email: String,
@@ -73,28 +73,86 @@ Response:
 	}]
 }
 
-###POST /group/join/groupID
+###POST /group/groupID/join
 Join a given group
+Response:  
+{  
+    success: boolean,  
+    group: Group Object 
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
+}
 
 ###POST /group/create
-Create a group (if allowed)
+Create a new group
+Parameters:
+name: String,
+description: String
+Response:  
+{  
+    success: boolean,  
+    id: group's assigned ID,  
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
+}
 
-###POST /group/info/groupID
+###POST /group/groupID/addmember
+Add a user to a given group
+Parameters:
+email: String
+Response:
+{  
+    success: boolean,  
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
+}
+
+###POST /group/groupID/info/
 - Group Object
 
-###POST /group/update/groupID
+###POST /group/groupID/update
 Update a given group
 
-###POST /group/remove/groupID
+###POST /group/groupID/remove
 Remove a given group
 
 ###POST /group/list/userID
 Get available groups for a given user
 
 
-
 ##Question API
-###POST /question/new
+###Question Object
+{
+	name: String,
+	description: String,
+	members: [{
+		id: mongoose.Schema.Types.ObjectId,
+		email: String,
+		firstname: String,
+		lastname: String
+	}],
+	admins: [mongoose.Schema.Types.ObjectId],
+	questions: [{
+		id: mongoose.Schema.Types.ObjectId,
+		question: String
+	}]
+}
+
+###POST /group/groupID/questions/
+Response:
+{  
+    success: boolean,  
+    questions: [Question Object],  
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
+}
+
+
+###POST /group/groupID/questions/new
+Parameters:
+question: String
+Response:
+{  
+    success: boolean,  
+    id: question's assigned ID,  
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
+}
 Ask a question
 
 ###POST /question/update
