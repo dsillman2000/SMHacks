@@ -240,10 +240,9 @@ html, body {
     var questions;
 
     $(document).ready(function () {//call page with 
-        $.post("/api/v1/account/loggedin", function (data, status) {
-            console.log(data);
+        $.get("/api/v1/account/loggedin", function (data, status) {
             if (!data.success) {
-                //window.location.replace("index.html");
+                window.location.replace("index.html");
             }
         });
 
@@ -251,11 +250,13 @@ html, body {
         var url = window.location.href;
 
         var splitURL = url.slice(url.indexOf("?")).split('&');
-        if (splitURL.length >= 2) {
+        if (splitURL.length >= 1) {
             groupId = splitURL[0].split('=')[1];
 
             if (splitURL.length >= 2) {
                 questionId = splitURL[1].split('=')[1];
+            } else {
+                questionId = null;
             }
 
         } else {//Display first question in group
@@ -267,6 +268,9 @@ html, body {
 
         $.post("/api/v1/group/" + groupId + "/questions", {}, function(data, status) {
             for (var i = 0; i < data.questions.length; ++i) {
+                if (questionId === null) {
+                    questionId = data.quesitons[0]._id;
+                }
                 if (data.questions._id == questionId) {
                     clearComments();
                     setQuestion(data.questions[i]);
