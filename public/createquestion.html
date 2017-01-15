@@ -163,8 +163,10 @@
     $(document).ready(function() {
         
         var group = window.location.href.split("?groupId=");
-        if (group.length == 2) {
-            var groupId = group[1];
+        if (group.length >= 2) {
+            
+            var groupId = group[1].replace("&questionId", "");
+            console.log(groupId);
         } else {
             window.location.replace("/groups.html");
         }

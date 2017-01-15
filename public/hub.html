@@ -222,35 +222,26 @@ html, body {
             }
         });
 
+
         var url = window.location.href;
 
         var splitURL = url.slice(url.indexOf("?")).split('=');
         if (splitURL.length >= 2) {
-            groupId = splitURL[1];
+            groupId = splitURL[1].replace("&questionId", "");
 
             if (splitURL.length >= 4) {
                 questionId = splitURL[3];
             }
 
-            $('#newquestion').click(function (e) {
-                e.preventDefault();
-                window.location.replace("/createquestion.html?groupId=" + groupId);
-            });
-
         } else {
             window.location.replace('/groups.html');
         }
 
+        clearQuestions();
+        getQuestions();
 
-    })
 
-    function getQuestions() {
-        $.post("/api/v1/group/" + groupID + "/questions", {}, function (data, status) {
-            if (data.success) {
-                questions = data.questions;
-            }
-        });
-    }
+    });
 
     function clearQuestions() {
         var header = `
@@ -262,10 +253,29 @@ html, body {
                                 <td><button class="btn btn-primary" id="newquestion">+</button></td>
                             </tr>`;
         $('#qbody').html(header);
+
+        $('#newquestion').click(function (e) {
+            e.preventDefault();
+            window.location.replace("/createquestion.html?groupId=" + groupId);
+        });
     }
 
-    function addQuestion() {
+    function getQuestions() {//get and render questions
+        $.post("/api/v1/group/" + groupId + "/questions", function (data, status) {
+            console.log(data.questions);
+            for (var i = 0; i < data.questions.length; ++i) {
+                addQuestion(data.questions[i]);
+            }
+        });
+    }
 
+    function addQuestion(q) {
+        var question = `<tr class="qrow">
+            <td><a class="question" href="hub.html?groupId=GROUPID&questionId=QID">QUESTION</a></td>
+        </tr>`;
+
+        question = question.replace("GROUPID", groupId).replace("QUESTION", q.question).replace("QID", q.id);
+        $('#qbody').append(question);
     }
 
     function clearComments() {
