@@ -93,6 +93,15 @@ route.post('/:groupId/questions', function(req, res) {
   
 });
 
+route.post('/:groupId/info', function(req, res) {
+  
+  Group.findById(req.params.groupId, function(err, group) {
+    if (err) res.json({ success: false, error: err });
+    else res.json({ success: false, group: group, error: err });
+  });
+  
+});
+
 route.post('/:groupId/questions/create', function(req, res) {
   
   if (!req.body.question || !req.body.description) res.json({ success: false, error: "Pleave provide a question" });

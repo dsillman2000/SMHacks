@@ -153,7 +153,7 @@
     color: grey;
 }
 .arow {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid #ccc;
 }
 h1, h2, h3 {
     font-family: Helvetica;
@@ -203,6 +203,10 @@ html, body {
     background-color: white;
 }
 
+#answertable {
+    width: 100%;
+}
+
 #dialog {
     width: 70%;
     margin-left:27%;
@@ -245,7 +249,6 @@ html, body {
         });
 
         clearQuestions();
-        clearMembers();
         getQuestions();
 
         $.post("/api/v1/group/" + groupId + "/questions", {}, function(data, status) {
