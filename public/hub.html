@@ -328,7 +328,7 @@ html, body {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="answerdetails">Posted by FIRSTNAME LASTNAME at TIMEOFDAY on DATE</p>
+                            <p class="answerdetails">Posted by FIRSTNAME LASTNAME at TIMEDATE</p>
                         </div>
                     </div>
                 </td>
@@ -337,10 +337,16 @@ html, body {
         comment = comment.replace("FIRSTNAME", c.firstname);
         comment = comment.replace("LASTNAME", c.lastname);
         var time = new Date(c.date);
-        var timeofday = time.getHours() + ":" + time.getMinutes;
-        var date = time.getDay() + ', ' + time.getMonth() + ' ' + time.getUTCDate() + ', ' + time.getFullYear();
-        comment = comment.replace("TIMEOFDAY", timeofday);
-        comment = comment.replace("DATE", date);
+        var opt = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        };
+        var tstr = time.toLocaleTimeString("en-us", opt);
+        comment = comment.replace("TIMEDATE", tstr);
         $('#answertable').first().append(comment);
     }
 
