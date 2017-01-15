@@ -78,7 +78,7 @@
 <!--Main Page-->
 <div class="col-md-9 col-md-offset-1" id="scrollingpanel" style="padding: 10px 30px 0px 0px">
 <div class="card" style="width:100%">
-<div class="row" style="height:80px; padding-left: 10px;">
+<div class="row" style="height:80px; padding-left: 10px;" id="users">
 <!--                        Online users-->
 <div class="user">
     <img src="/css/personIcon.png">
@@ -245,6 +245,7 @@ html, body {
         });
 
         clearQuestions();
+        clearMembers();
         getQuestions();
 
         $.post("/api/v1/group/" + groupId + "/questions", {}, function(data, status) {

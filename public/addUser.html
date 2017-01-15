@@ -51,24 +51,19 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <br>
-                            <h2 class="text-center">Create Question</h2>
+                            <h2 class="text-center">Add User</h2>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <form id="login">
                                 <div class="form-group">
-                                    <label for="name">Question</label>
-                                    <input type="text" class="form-control" id="name" placeholder="What do you want to ask?" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea class="form-control" rows="3" id="description" placeholder="Anything else you would like to add?" ></textarea>
-                                    <small id="emailHelp" class="form-text text-muted">Other users in your class will automatically see you question</small>
+                                    <label for="name">User Email</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Email" />
                                 </div>
                                 
                                 <div class="form-group text-center">
-                                    <button id="createbutton" type="submit" class="btn btn-primary">Create</button>
+                                    <button id="createbutton" type="submit" class="btn btn-primary">Add</button>
 <!--                                    <button id="addyourself" class="btn btn-primary">Join group</button>-->
                                 </div>
                             </form>
@@ -174,13 +169,12 @@
         
         $('#createbutton').click(function(e) {
             e.preventDefault();
-            $.post('/api/v1/group/' + groupId + '/questions/create', {
-                question: $('#name').val(),
-                description: $('#description').val()
+            $.post('/api/v1/group/' + groupId + '/addmember', {
+                email: $('#name').val(),
             }, function(data, status) {
                 console.log(data);
                 if (data.success) {
-                    window.location.replace("/hub.html?groupId=" + groupId + "&questionId=" + data.id);
+                    window.location.replace("/hub.html?groupId=" + groupId);
                 }
             });
         });
