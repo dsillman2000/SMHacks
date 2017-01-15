@@ -1,3 +1,22 @@
+var Question = require('../db/models/question');
+
+var recieveMessage = function(message, roomId, userId, io) {
+	
+	
+	
+	
+	
+	
+	io.to(roomId).emit('message', {
+		message: message,
+		userId: userId
+	});
+	
+		
+};
+
+
+
 module.exports = function(io, session, passport) {
 	
 	
@@ -6,20 +25,20 @@ module.exports = function(io, session, passport) {
 	})
 	.on('connection', function(socket) {
 		
-//		if (!socket.request.session.passport) {
-//			socket.emit('logout', '');
-//			return;
-//		}
-//	    
-//		var userId = socket.request.session.passport.user;
-//		if (userId && passport.authenticate(userId)) {
-////			sendRecentMessages(socket);
-////			sendChatList(socket);
+		if (!socket.request.session.passport) {
+			socket.emit('logout', '');
+			return;
+		}
+	    
+		var userId = socket.request.session.passport.user;
+		if (userId && passport.authenticate(userId)) {
+//			sendRecentMessages(socket);
+//			sendChatList(socket);
 //			sendChatInfo(socket);
-//		} else {
-//			socket.emit('logout', '');
-//			return;
-//		}
+		} else {
+			socket.emit('logout', '');
+			return;
+		}
 
 		socket.emit('init');
 		
@@ -31,21 +50,16 @@ module.exports = function(io, session, passport) {
 			
 			console.log('new message: ' + msg + ' to group ' + chatRoomId);
 			
-			io.to(chatRoomId).emit('message', {
-				message: msg
-//				userId:
-			});
+			socket.request.session.touch();
 			
-//			socket.request.session.touch();
-			
-//			var userId = socket.request.session.passport.user;
-//			if (userId && passport.authenticate(userId)) {
-//				
-//				recieveMessage(msg, chatRoomId, userId, io);
-//				
-//			} else {
-//				socket.emit('logout', '');
-//			}
+			var userId = socket.request.session.passport.user;
+			if (userId && passport.authenticate(userId)) {
+				
+				recieveMessage(msg, chatRoomId, userId, io);
+				
+			} else {
+				socket.emit('logout', '');
+			}
 		});
 	});
 };

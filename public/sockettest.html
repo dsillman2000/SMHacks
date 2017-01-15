@@ -15,18 +15,25 @@
 	<script>
 
 
-var group = 'testgroup';
+var group = '587ba4870b6ad6acf9ebcbdc';
 
 var socket = io();
+
+//You are not logged in
+socket.on('logout', function() {
+	window.location.replace('/index.html');
+});
 
 socket.on('init', function() {
 	socket.emit('mygroup', group);
 });
 
 socket.on('message', function(data) {
-	$("#test").append("<p>" + data.message + "</p>");
+	$("#test").append("<p>" + data.message + "  from  " + data.userId + "</p>");
 	
 });
+
+
 
 $(document).ready(function() {
 	
