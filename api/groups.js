@@ -26,7 +26,7 @@ route.post('/create', function(req, res) {
   });
 });
 
-var addMemberToGroup = function(req, res, groupId, userId) {
+var addMemberToGroup = function(req, res, groupId, user) {
   //Find group first
   Group.findById(groupId, function(err, group) {
       if (err) res.json({ success: false, error: err });
@@ -35,11 +35,11 @@ var addMemberToGroup = function(req, res, groupId, userId) {
         
         console.log("found group");
         console.log(group.members);
-        console.log("comparing to " + userId);
+        console.log("comparing to " + user.id);
         //Check that the user is not already in the group
         var containsUser = false;
         for (var i = 0; i < group.members.length; i++) {
-          if (group.members[i].id == userId) {
+          if (group.members[i].id == user.id) {
             containsUser = true;
             break;
           }
@@ -48,23 +48,18 @@ var addMemberToGroup = function(req, res, groupId, userId) {
         if (containsUser) res.json({ success: false, error: "Already in group" });
         else {
           //If user is not present, add him to list of members
-          User.findById(userId, function(err, user) {
-            if (err) res.json({ success: false, error: err });
-            else if (!user) res.json({ success: false, error: "User not found" });
-            else {
-              Group.findByIdAndUpdate(req.params.groupId, {
-              $push: {"members":  { //addToSet key prevents duplicates 
-                		id: user.id,
-                		email: user.email,
-                		firstname: user.firstname,
-                		lastname: user.lastname
-              }}}, function(err, group) {
-                if (err) res.json({ success: false, error: err });
-                else if (!group) res.json({ success: false, error: "Group not found somehow" });
-                else res.json({ success: true });
-              });
-            }
-          });
+
+            Group.findByIdAndUpdate(req.params.groupId, {
+            $push: {"members":  { //addToSet key prevents duplicates 
+              		id: user.id,
+              		email: user.email,
+              		firstname: user.firstname,
+              		lastname: user.lastname
+            }}}, function(err, group) {
+              if (err) res.json({ success: false, error: err });
+              else if (!group) res.json({ success: false, error: "Group not found somehow" });
+              else res.json({ success: true });
+            });
           
         }
       }
@@ -79,7 +74,7 @@ route.post('/:groupId/addmember', function(req, res) {
     if (err) res.json({ success: false, error: err });
     else if (!user) res.json({ success: false, error: "User not found" });
     else {
-      addMemberToGroup(req, res, req.params.groupId, user.id);
+      addMemberToGroup(req, res, req.params.groupId, user);
     }
   
   });
@@ -87,7 +82,7 @@ route.post('/:groupId/addmember', function(req, res) {
 
 route.post('/:groupId/join', function(req, res) {
   
-  addMemberToGroup(req, res, req.params.groupId, req.user.id);
+  addMemberToGroup(req, res, req.params.groupId, req.user);
   
 });
 
