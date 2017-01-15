@@ -221,6 +221,8 @@ html, body {
     var questionId;
     var questions;
     var users;
+    var profilePics = ['css/teenager-183.jpg', 'css/teenage-boy-with-spiky-hair.jpg', 'css/normal-teenage-behavior.jpg', 'css/personIcon.png', 'css/personIcon.png', 'personIcon.png'];
+    var profileIndex = 0;
 
     var url = window.location.href;
 
@@ -253,6 +255,7 @@ html, body {
         $.post("/api/v1/group/groupID/info/".replace("groupID", groupId), {}, function (data, status) {
             if (data.success) {
                 users = data.group.members;
+                profileIndex = 0;
                 for (var i = 0; i < users.length; ++i) {
                     addUser(users[i]);
                     console.log(users[i]);
@@ -274,9 +277,9 @@ html, body {
 
                     clearComments();
                     setQuestion(data.questions[i]);
-                    for (var j = 0; j < data.questions[i].comments.length; ++j) {
-                        addComment(data.questions[i].comments[j]);
-                    }
+                    // for (var j = 0; j < data.questions[i].comments.length; ++j) {
+                    //     addComment(data.questions[i].comments[j]);
+                    // }
                     break;
                 }
             }
@@ -308,6 +311,7 @@ html, body {
 
     function getQuestions() {//get and render questions
         $.post("/api/v1/group/" + groupId + "/questions", function (data, status) {
+            console.log(data);
             for (var i = 0; i < data.questions.length; ++i) {
                 addQuestion(data.questions[i]);
             }
@@ -329,19 +333,36 @@ html, body {
 
     function addUser(user) {
         var html = `<div class="user">
-        <img src="/css/personIcon.png">
+        <img src="LINK">
         <p>NAME</p>
-        </div>`;
+        </div>`.replace("LINK", profilePics[profileIndex++]);
 
         $('#users').append(html.replace("NAME", user.firstname + ' ' + user.lastname));
 
     }
 
     function setQuestion(q) {
+        
         $('#questionstatement').text(q.question);
         $('#qbody').text(q.desc);
-        $('#qdetails').text('Posted by Bob Bobson at 23:00 on Saturday, January 14');
-        for (var i = 0; i < q.comments.length; ++i) {
+        var name = q.user.userId;
+        for (var i = 0; i < users.length; ++i) {
+            if (users[i].id == name) {
+                name = users[i].firstname + ' ' + users[i].lastname;
+                break;
+            }
+        }
+        var opt = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        };
+        var time = new Date(q.date).toLocaleTimeString(opt);
+        $('#qdetails').text('Posted by DANAME at TIME'.replace("DANAME", name).replace("TIME", time));
+        for (var i = 0; i < q.comments.length; i++) {
             addComment(q.comments[i]);
         }
     }
@@ -412,6 +433,7 @@ html, body {
         if (e.keyCode == 13) { //enter key pressed
             var comment = $('#comment').val();
             $('#comment').val('');
+            console.log("new message");
             socket.emit('chat message', comment, questionId);
             //            addComment({
             //            comment: comment,
