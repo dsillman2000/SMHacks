@@ -48,17 +48,24 @@ var addMemberToGroup = function(req, res, groupId, userId) {
         if (containsUser) res.json({ success: false, error: "Already in group" });
         else {
           //If user is not present, add him to list of members
-          Group.findByIdAndUpdate(req.params.groupId, {
-            $push: {"members":  { //addToSet key prevents duplicates 
-              		id: userId,
-              		email: req.user.email,
-              		firstname: req.user.firstname,
-              		lastname: req.user.lastname
-            }}}, function(err, group) {
-              if (err) res.json({ success: false, error: err });
-              else if (!group) res.json({ success: false, error: "Group not found somehow" });
-              else res.json({ success: true });
-            });
+          User.findById(userId, function(err, user) {
+            if (err) res.json({ success: false, error: err });
+            else if (!user) res.json({ success: false, error: "User not found" });
+            else {
+              Group.findByIdAndUpdate(req.params.groupId, {
+              $push: {"members":  { //addToSet key prevents duplicates 
+                		id: user.id,
+                		email: user.email,
+                		firstname: user.firstname,
+                		lastname: user.lastname
+              }}}, function(err, group) {
+                if (err) res.json({ success: false, error: err });
+                else if (!group) res.json({ success: false, error: "Group not found somehow" });
+                else res.json({ success: true });
+              });
+            }
+          });
+          
         }
       }
   });
