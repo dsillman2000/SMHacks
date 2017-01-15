@@ -127,8 +127,12 @@ Response:
 }
 
 ###POST /group/groupID/info/
-- Group Object
-TODO
+Response:
+{  
+    success: boolean,  
+    group: Group Object
+    error: if success false, type of error (usernametaken, invalidusername, emailtaken, invalidemail),  
+}
 
 ###POST /group/groupID/update
 Update a given group
