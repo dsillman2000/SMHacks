@@ -80,18 +80,8 @@
 <div class="card" style="width:100%">
 <div class="row" style="height:80px; padding-left: 10px;" id="users">
 <!--                        Online users-->
-<div class="user">
-    <img src="/css/personIcon.png">
-    <p>Jim bob</p>
-</div>
-<div class="user" style="margin: 0px 5px;">
-<img src="/css/personIcon.png">
-<p>John Smith</p>
-</div>
-<div class="user" style="margin: 0px 5px;">
-<img src="/css/personIcon.png">
-<p>Your Boi</p>
-</div>
+
+
 
 </div>
 </div>
@@ -113,12 +103,13 @@
     </div>
 </div>
 </div>
-    
-</br><div class="card" style="margin-bottom: 200px;">
-    <table id="answertable"  style="padding:5px;">
-        <tbody>
-        </tbody>
-    </table>
+
+</br>
+<div class="card" style="margin-bottom: 200px;">
+<table id="answertable" style="padding:5px;">
+<tbody>
+</tbody>
+</table>
 <!--</div>-->
 
 </div>
@@ -231,25 +222,27 @@ html, body {
     var questions;
     var users;
 
+    var url = window.location.href;
+
+    var splitURL = url.slice(url.indexOf("?")).split('&');
+    if (splitURL.length >= 1) {
+        groupId = splitURL[0].split('=')[1];
+
+        if (splitURL.length >= 2) {
+            questionId = splitURL[1].split('=')[1];
+        } else {
+            questionId = undefined;
+        }
+
+    } else {//Display first question in group
+        //window.location.replace('/groups.html');
+    }
+
 
 
     $(document).ready(function () {//call page with 
 
-        var url = window.location.href;
 
-        var splitURL = url.slice(url.indexOf("?")).split('&');
-        if (splitURL.length >= 1) {
-            groupId = splitURL[0].split('=')[1];
-
-            if (splitURL.length >= 2) {
-                questionId = splitURL[1].split('=')[1];
-            } else {
-                questionId = undefined;
-            }
-
-        } else {//Display first question in group
-            //window.location.replace('/groups.html');
-        }
 
         $.get("/api/v1/account/loggedin", function (data, status) {
             if (!data.success) {
@@ -260,6 +253,9 @@ html, body {
         $.post("/api/v1/group/groupID/info/".replace("groupID", groupId), {}, function (data, status) {
             if (data.success) {
                 users = data.group.members;
+                for (var i = 0; i < users.length; ++i) {
+                    addUser(users[i]);
+                }
             }
         });
 
@@ -328,6 +324,16 @@ html, body {
 
     function clearComments() {
         $('#answertable').html("");
+    }
+
+    function addUser(user) {
+        var html = `<div class="user">
+        <img src="/css/personIcon.png">
+        <p>NAME</p>
+        </div>`;
+
+        $('#users').append(html.replace("NAME", user.firstname + ' ' + user.lastname));
+
     }
 
     function setQuestion(q) {
