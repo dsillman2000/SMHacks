@@ -13,12 +13,15 @@
     url('/css/fonts/HelveticaNeueMedium.woff') format('woff');
     font-weight: bold;
 }
-body.blue {
+body{
+    background-image: url("/css/emptyClassroom.jpg");
+}
+div.blue {
     background-color: #88AAFF;
     font-family: "HelveticaNeueThin";
     color: #DDD
 }
-body.purple {
+div.purple {
     background-color: #9955FF;
     font-family: "HelveticaNeueThin";
     color: #DDD
@@ -26,7 +29,7 @@ body.purple {
 h1.main{
     font-size: 4.5em;
 }
-body.unfilled {
+div.white {
     background-color:#DDD;
     font-family:"HelveticaNeueThin";
     color: #333;
