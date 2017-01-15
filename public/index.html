@@ -5,12 +5,16 @@
     <meta charset="utf-8">
     <title>Socratik</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <script src="/path/to/vue.js"></script>
+    <script src="/path/to/vue-router.js"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
         <a class="navbar-brand" href="#">Socratik</a>
@@ -28,111 +32,109 @@
     </nav>
 
     <!--Start main page -->
-
-    <br>
-    <br>
-    <div class="row">
-        <div class="col-sm-8 offset-sm-2">
-            <h1 class="text-center title">Welcome to <span class="bold">Socratik</span></h1>
+    <div id="app">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2">
+                <h1 class="text-center title">Welcome to <span class="bold">Socratik</span></h1>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <br>
-        <div class="col-sm-4 offset-sm-4">
+        <div class="row">
             <br>
-            <div class="row card">
-                <div class="col-sm-10 offset-sm-1">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <br>
-                            <h2 class="text-center">Log In</h2>
+            <div class="col-sm-4 offset-sm-4">
+                <br>
+                <div class="row card">
+                    <div class="col-sm-10 offset-sm-1">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <br>
+                                <h2 class="text-center">Log In</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form id="login">
+                                    <div class="form-group">
+                                        <label for="loginemail">Email Address:&nbsp;&nbsp;</label>
+                                        <input type="email" class="form-control" id="loginemail" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="loginpassword">Password:&nbsp;&nbsp;</label>
+                                        <input type="password" class="form-control" id="loginpassword" />
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button id="loginbutton" type="submit" class="btn btn-primary">Log In</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form id="login">
-                                <div class="form-group">
-                                    <label for="loginemail">Email Address:&nbsp;&nbsp;</label>
-                                    <input type="email" class="form-control" id="loginemail" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="loginpassword">Password:&nbsp;&nbsp;</label>
-                                    <input type="password" class="form-control" id="loginpassword" />
-                                </div>
-                                <div class="form-group text-center">
-                                    <button id="loginbutton" type="submit" class="btn btn-primary">Log In</button>
-                                </div>
-                            </form>
+                </div>
+                <!-- OR -->
+                <br>
+                <div class="row card">
+                    <div class="col-sm-10 offset-sm-1">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <br>
+                                <h2 class="text-center">Register</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form id="register">
+                                    <div class="form-group">
+                                        <label for="registeremail">Email Address:&nbsp;&nbsp;</label>
+                                        <input type="email" class="form-control" id="registeremail" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="registerpassword">Password:&nbsp;&nbsp;</label>
+                                        <input type="password" class="form-control" id="registerpassword" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="registerfirstname">First Name:&nbsp;&nbsp;</label>
+                                        <input type="text" class="form-control" id="registerfirstname" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="registerlastname">Last Name:&nbsp;&nbsp;</label>
+                                        <input type="text" class="form-control" id="registerlastname" />
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button id="registerbutton" type="submit" class="btn btn-primary">Register</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- OR -->
-            <br>
-            <div class="row card">
-                <div class="col-sm-10 offset-sm-1">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <br>
-                            <h2 class="text-center">Register</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <form id="register">
-                                <div class="form-group">
-                                    <label for="registeremail">Email Address:&nbsp;&nbsp;</label>
-                                    <input type="email" class="form-control" id="registeremail" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="registerpassword">Password:&nbsp;&nbsp;</label>
-                                    <input type="password" class="form-control" id="registerpassword" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="registerfirstname">First Name:&nbsp;&nbsp;</label>
-                                    <input type="text" class="form-control" id="registerfirstname" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="registerlastname">Last Name:&nbsp;&nbsp;</label>
-                                    <input type="text" class="form-control" id="registerlastname" />
-                                </div>
-                                <div class="form-group text-center">
-                                    <button id="registerbutton" type="submit" class="btn btn-primary">Register</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <br>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </body>
 <script>
-    $(document).ready(function() {
-        $('#loginbutton').click(function(e) {
+    $(document).ready(function () {
+        $('#loginbutton').click(function (e) {
             e.preventDefault();
             $.post("/api/v1/account/login", {
                 email: $('#loginemail').val(),
                 password: $('#loginpassword').val()
-            }, function(data, status) {
+            }, function (data, status) {
                 console.log(data);
                 window.location.replace("/hub.html");
             });
         });
 
-        $('#registerbutton').click(function(e) {
+        $('#registerbutton').click(function (e) {
             e.preventDefault();
             $.post("/api/v1/account/register", {
                 email: $('#registeremail').val(),
                 password: $('#registerpassword').val(),
                 firstname: $('#registerfirstname').val(),
                 lastname: $('#registerlastname').val()
-            }, function(data, status) {
+            }, function (data, status) {
                 console.log(data);
                 window.location.replace("/hub.html");
             });

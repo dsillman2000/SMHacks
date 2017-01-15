@@ -186,18 +186,23 @@ html, body {
 <script>
 
     var groupID;
+    var questions;
 
-    $(document).ready(function() {
+    $(document).ready(function () {//call page with 
         var url = window.location.href;
         groupID = url.slice(url.indexOf("?")).split('=')[1];
     })
 
     function getQuestions() {
-        $.post("/api/v1/")
+        $.post("/api/v1/group/" + groupID + "/questions", {}, function (data, status) {
+            if (data.success) {
+                questions = data.questions;
+            }
+        });
     }
 
     function clearQuestions() {
-
+        
     }
 
     function addQuestion() {
