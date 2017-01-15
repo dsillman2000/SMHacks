@@ -1,6 +1,9 @@
 @font-face{
     font-family: HelveticaNeueThin;
-    src: url('/fonts/HelveticaNeueThin.ttf');
+    src: url('/css/fonts/HelveticaNeueThin.ttf') format('truetype'),
+    url('/css/fonts/HelveticaNeueThin.otf') format('otf'),
+    url('/css/fonts/HelveticaNeueThin.eot') format('eot'),
+    url('/css/fonts/HelveticaNeueThin.woff') format('woff');
 }
 @font-face{
     font-family: HelveticaNeueLt;
