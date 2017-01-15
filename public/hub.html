@@ -92,69 +92,22 @@
 <div class="card" style="padding:9px;">
 <div class="row">
     <div class="col-md-12">
-        <h1 id="questionstatement">Was Huckleberry Finn a real book?</h1>
+        <h1 id="questionstatement"></h1>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p id="qbody" class="questionbody">So I was reading this assignment I got in English, and I thought to myself, "This name is so ridiculous, how could
-            a book called 'Huckleberry Finn' even exist in the first place?" Can anyone help me find some record of it on
-            the internet or something so I know that I'm not going completely crazy?</p>
+        <p id="qbody" class="questionbody"></p>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p id="qdetails" class="details">Posted by Test Testson at 22:53 on Saturday, January 14</p>
+        <p id="qdetails" class="details"></p>
     </div>
 </div>
 <div class="row fullheight">
     <table id="answertable">
         <tbody>
-            <tr class="arow">
-                <td>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="answer">I think you're right! I tried to do some research, yet except on our homework assignments, I
-                                found nothing on the entire internet about any such book. It must be a conspiracy!</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="answerdetails">Posted by Bob Bobson at 23:00 on Saturday, January 14</p>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="arow">
-                <td>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="answer">I think you're right! I tried to do some research, yet except on our homework assignments, I
-                                found nothing on the entire internet about any such book. It must be a conspiracy!</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="answerdetails">Posted by Bob Bobson at 23:00 on Saturday, January 14</p>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr class="arow">
-                <td>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="answer">I think you're right! I tried to do some research, yet except on our homework assignments, I
-                                found nothing on the entire internet about any such book. It must be a conspiracy!</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="answerdetails">Posted by Bob Bobson at 23:00 on Saturday, January 14</p>
-                        </div>
-                    </div>
-                </td>
-            </tr>
         </tbody>
     </table>
 </div>
@@ -290,7 +243,7 @@ html, body {
         $.post("/api/v1/group/" + groupId + "/questions", {}, function(data, status) {
             for (var i = 0; i < data.questions.length; ++i) {
                 if (questionId === undefined) {
-                    questionId = data.quesitons[0]._id;
+                    questionId = data.questions[0]._id;
                 }
                 if (data.questions[i]._id == questionId) {
                     clearComments();
