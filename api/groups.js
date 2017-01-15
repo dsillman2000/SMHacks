@@ -97,7 +97,7 @@ route.post('/:groupId/info', function(req, res) {
   
   Group.findById(req.params.groupId, function(err, group) {
     if (err) res.json({ success: false, error: err });
-    else res.json({ success: false, group: group, error: err });
+    else res.json({ success: true, group: group, error: err });
   });
   
 });
