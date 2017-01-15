@@ -37,3 +37,6 @@ div.white {
 div.fullheight {
     height: 100vh;
 }
+img.hoverlight:hover{
+    filter: brightness(1.1);
+}
