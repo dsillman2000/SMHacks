@@ -6,12 +6,16 @@
     url('/css/fonts/HelveticaNeueThin.woff') format('woff');
 }
 @font-face{
-    font-family: HelveticaNeueLt;
-    src: local('fonts/HelveticaNeueLt.tff');
+    font-family: HelveticaNeueThin;
+    src: url('/css/fonts/HelveticaNeueMedium.ttf') format('truetype'),
+    url('/css/fonts/HelveticaNeueMedium.otf') format('otf'),
+    url('/css/fonts/HelveticaNeueMedium.eot') format('eot'),
+    url('/css/fonts/HelveticaNeueMedium.woff') format('woff');
+    font-weight: bold;
 }
 body.blue {
     background-color: #88AAFF;
-    font-family: 'HelveticaNeueThin';
+    font-family: "HelveticaNeueThin";
     color: #DDD
 }
 body.purple {
@@ -19,8 +23,11 @@ body.purple {
     font-family: "HelveticaNeueThin";
     color: #DDD
 }
+h1.main{
+    font-size: 4.5em;
+}
 body.unfilled {
     background-color:#DDD;
-    font-family:"HelveticaNeueLt";
+    font-family:"HelveticaNeueThin";
     color: #333;
 }
