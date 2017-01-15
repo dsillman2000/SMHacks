@@ -415,6 +415,7 @@ html, body {
     });
 
     socket.on('init', function () {
+        console.log("initialized");
         socket.emit('mygroup', questionId);
     });
 
