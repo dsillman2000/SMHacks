@@ -33,7 +33,7 @@ Response:
 {  
     success: boolean,  
     id: users's assigned ID,
-    groups: [String] //IDs of groups
+    groups: [Group Object]
     error: if success false, type of error (nosuchuser, invalidpassword)  
 }  
 
