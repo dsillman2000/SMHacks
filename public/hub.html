@@ -269,7 +269,7 @@ html, body {
         });
 
         //Get group for users in here:
-        $.post("/api/v1/group/groupID/info/".replace(groupID, groupId), {}, function (data, status) {
+        $.post("/api/v1/group/groupID/info/".replace("groupID", groupId), {}, function (data, status) {
             if (data.success) {
                 users = data.members;
                 console.log(users);
