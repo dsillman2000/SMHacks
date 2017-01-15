@@ -220,6 +220,7 @@ html, body {
     var groupId;
     var questionId;
     var questions;
+    var users;
 
     var url = window.location.href;
 
@@ -262,6 +263,15 @@ html, body {
                 }
             }
         });
+
+        //Get group for users in here:
+        $.post("/api/v1/group/groupID/info/".replace(groupID, groupId), {}, function (data, status) {
+            if (data.success) {
+                users = data.members;
+                console.log(users);
+            }
+        });
+
 
         $('#adduser').click(function() {
             window.location.replace('adduser.html?groupId=' + groupId);
