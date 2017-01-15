@@ -5,42 +5,42 @@
     <title>Socratik</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
         crossorigin="anonymous">
 </head>
 
 <body class="fullheight">
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">Socratik</a>
+        <a class="navbar-brand" href="#">Socratik</a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a href="#">Home</a>
-                    </li>
-                    &nbsp;&nbsp;&nbsp;
-                    <li class="nav-item">
-                        <a href="about.html">About</a>
-                    </li>
-                    &nbsp;&nbsp;&nbsp;
-                    <li class="nav-item">
-                        <a href="groups.html">My Groups</a>
-                    </li>
-                </ul>
-                
-            </div>
-            <ul class="navbar-nav mr-right">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a href="#">Home</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-item">
+                    <a href="about.html">About</a>
+                </li>
+                &nbsp;&nbsp;&nbsp;
+                <li class="nav-item">
+                    <a href="groups.html">My Groups</a>
+                </li>
+            </ul>
+
+        </div>
+        <ul class="navbar-nav mr-right">
             <li class="nav-item active">
                 <button id="adduser" class="btn btn-primary">+ Add User</button>
             </li>
         </ul>
-        </nav>
-        
+    </nav>
+
     <div class="fullheight">
         <div class="row fullheight">
             <!--Sidebar-->
@@ -226,38 +226,50 @@ html, body {
     var questions;
     var users;
 
-    var url = window.location.href;
 
-    var splitURL = url.slice(url.indexOf("?")).split('&');
-    if (splitURL.length >= 1) {
-        groupId = splitURL[0].split('=')[1];
 
-        if (splitURL.length >= 2) {
-            questionId = splitURL[1].split('=')[1];
-        } else {
-            questionId = undefined;
+    $(document).ready(function () {//call page with 
+
+        var url = window.location.href;
+
+        var splitURL = url.slice(url.indexOf("?")).split('&');
+        if (splitURL.length >= 1) {
+            groupId = splitURL[0].split('=')[1];
+
+            if (splitURL.length >= 2) {
+                questionId = splitURL[1].split('=')[1];
+            } else {
+                questionId = undefined;
+            }
+
+        } else {//Display first question in group
+            //window.location.replace('/groups.html');
         }
 
-    } else {//Display first question in group
-        //window.location.replace('/groups.html');
-    }
-    
-    $(document).ready(function () {//call page with 
         $.get("/api/v1/account/loggedin", function (data, status) {
             if (!data.success) {
                 window.location.replace("index.html");
             }
         });
 
+        $.post("/api/v1/group/groupID/info/".replace("groupID", groupId), {}, function (data, status) {
+            if (data.success) {
+                users = data.group.members;
+            }
+        });
+
         clearQuestions();
         getQuestions();
 
-        $.post("/api/v1/group/" + groupId + "/questions", {}, function(data, status) {
+        $.post("/api/v1/group/" + groupId + "/questions", {}, function (data, status) {
+
+
             for (var i = 0; i < data.questions.length; ++i) {
                 if (questionId === undefined) {
                     questionId = data.questions[0]._id;
                 }
-                if (data.questions[i]._id == questionId) {
+                if (data.questions[i]._id == questionId) {//Get group for users in here:
+
                     clearComments();
                     setQuestion(data.questions[i]);
                     for (var j = 0; j < data.questions[i].comments.length; ++j) {
@@ -268,19 +280,11 @@ html, body {
             }
         });
 
-        //Get group for users in here:
-        $.post("/api/v1/group/groupID/info/".replace("groupID", groupId), {}, function (data, status) {
-            if (data.success) {
-                users = data.members;
-                console.log(users);
-            }
-        });
 
-
-        $('#adduser').click(function() {
+        $('#adduser').click(function () {
             window.location.replace('adduser.html?groupId=' + groupId);
         });
-        
+
     });
 
     function clearQuestions() {
@@ -341,13 +345,18 @@ html, body {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="answerdetails">Posted by FIRSTNAME LASTNAME at TIMEDATE</p>
+                            <p class="answerdetails">Posted by POSTNAME at TIMEDATE</p>
                         </div>
                     </div>
                 </td>
             </tr>`;
-        comment = comment.replace("ANSWERBODY", c.comment);
-        comment = comment.replace("FIRSTNAME", c.firstname);
+        var name = '';
+        for (var i = 0; i < users.length; ++i) {
+            if (users[i].id == c.userId) {
+                name = users[i].firstname + ' ' + users[i].lastname;
+                break;
+            }
+        }
         comment = comment.replace("LASTNAME", c.lastname);
         var time = new Date(c.date);
         var opt = {
@@ -367,17 +376,17 @@ html, body {
     var socket = io();
 
     //You are not logged in
-    socket.on('logout', function() {
-    	window.location.replace('/index.html');
+    socket.on('logout', function () {
+        window.location.replace('/index.html');
     });
-    
-    socket.on('init', function() {
-    	socket.emit('mygroup', questionId);
+
+    socket.on('init', function () {
+        socket.emit('mygroup', questionId);
     });
-    
-    socket.on('message', function(data) {
+
+    socket.on('message', function (data) {
         console.log('message received');
-    	addComment({
+        addComment({
             comment: data.message,
             date: data.date,
             firstname: 'test',
@@ -386,17 +395,17 @@ html, body {
     });
 
 
-    $('textarea').keyup(function(e){
-        if(e.keyCode == 13) { //enter key pressed
-            var comment =  $('#comment').val();
+    $('textarea').keyup(function (e) {
+        if (e.keyCode == 13) { //enter key pressed
+            var comment = $('#comment').val();
             $('#comment').val('');
             socket.emit('chat message', comment, questionId);
-//            addComment({
-//            comment: comment,
-//            date: Date.now(),
-//            firstName: 'test',
-//            lastname: 'test'
-//        });
+            //            addComment({
+            //            comment: comment,
+            //            date: Date.now(),
+            //            firstName: 'test',
+            //            lastname: 'test'
+            //        });
         }
     });
 </script>
