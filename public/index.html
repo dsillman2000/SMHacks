@@ -31,19 +31,19 @@
     <br>
     <br>
     <div class="row">
+        <div class="col-sm-4 offset-sm-4">
+            <h1 class="text-center title">Welcome to <span class="bold">Socratik</span></h1>
+        </div>
+    </div>
+    <div class="row">
         <br>
-        <div class="col-sm-4 offset-sm-4 card">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="text-center">Welcome to Socratik</h1>
-                </div>
-            </div>
+        <div class="col-sm-4 offset-sm-4">
             <br>
-            <br>
-            <div class="row">
+            <div class="row card">
                 <div class="col-sm-10 offset-sm-1">
                     <div class="row">
                         <div class="col-sm-12">
+                            <br>
                             <h2 class="text-center">Log In</h2>
                         </div>
                     </div>
@@ -67,11 +67,12 @@
                 </div>
             </div>
             <!-- OR -->
-            <hr>
-            <div class="row">
+            <br>
+            <div class="row card">
                 <div class="col-sm-10 offset-sm-1">
                     <div class="row">
                         <div class="col-sm-12">
+                            <br>
                             <h2 class="text-center">Register</h2>
                         </div>
                     </div>
@@ -135,9 +136,21 @@
     });
 </script>
 <style>
+    @font-face {
+        font-family: HelveticaNeueThin;
+        src: url('/css/fonts/HelveticaNeueThin.ttf') format('truetype'), url('/css/fonts/HelveticaNeueThin.otf') format('otf'), url('/css/fonts/HelveticaNeueThin.eot') format('eot'), url('/css/fonts/HelveticaNeueThin.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: HelveticaNeueThin;
+        src: url('/css/fonts/HelveticaNeueMedium.ttf') format('truetype'), url('/css/fonts/HelveticaNeueMedium.otf') format('otf'), url('/css/fonts/HelveticaNeueMedium.eot') format('eot'), url('/css/fonts/HelveticaNeueMedium.woff') format('woff');
+        font-weight: bold;
+    }
+    
     h1,
     h2,
     h3 {
+        font-family: "HelveticaNeueThin";
         font-weight: 200;
     }
     
@@ -152,6 +165,15 @@
     
     .spacer {
         line-height: 2em;
+    }
+    
+    .title {
+        color: white;
+        font-size: 4em;
+    }
+    
+    .bold {
+        font-weight: bold;
     }
 </style>
 
