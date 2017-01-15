@@ -277,7 +277,7 @@ html, body {
             if (splitURL.length >= 2) {
                 questionId = splitURL[1].split('=')[1];
             } else {
-                questionId = null;
+                questionId = undefined;
             }
 
         } else {//Display first question in group
@@ -289,10 +289,10 @@ html, body {
 
         $.post("/api/v1/group/" + groupId + "/questions", {}, function(data, status) {
             for (var i = 0; i < data.questions.length; ++i) {
-                if (questionId === null) {
+                if (questionId === undefined) {
                     questionId = data.quesitons[0]._id;
                 }
-                if (data.questions._id == questionId) {
+                if (data.questions[i]._id == questionId) {
                     clearComments();
                     setQuestion(data.questions[i]);
                     for (var j = 0; j < data.questions[i].comments.length; ++j) {
