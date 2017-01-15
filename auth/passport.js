@@ -1,4 +1,5 @@
 var User = require('../db/models/user');
+var Group = require('../db/models/group');
 
 var users = [{
    
@@ -49,9 +50,9 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        User.findOne({'id': id}, function(err, user) {
-			done(err, user);
-        });
+        User.findById(id, function(err, user) {
+	    done(err, user);
+	  });
     });
 
     // =========================================================================
@@ -168,8 +169,15 @@ module.exports = function(passport) {
                 if (!bcrypt.compareSync(password, user.password))
                     return done(null, false, 'Wrong Password');
                 
-                console.log('[USER] login from user with email' + user.email);
-                return done(null, user);
+                console.log('[USER] login from user with email' + user.email + ', id ' + user.id);
+                
+                Group.find({'members.id': user.id}).exec(function(err, groups) {
+                   user.groups = groups; 
+                   return done(null, user);
+                });
+                
+                
+                
             });
         })
     );

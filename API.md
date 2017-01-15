@@ -4,7 +4,7 @@ Everything is behind /api/v1
 ##Account API
 ###User object
 {  
-    id: int,  
+    id: String,  
     firstname: string,  
     lastname: string,  
     password: string (hash)  
@@ -32,7 +32,8 @@ password - string - user's password
 Response:  
 {  
     success: boolean,  
-    id: users's assigned ID,  
+    id: users's assigned ID,
+    groups: [String] //IDs of groups
     error: if success false, type of error (nosuchuser, invalidpassword)  
 }  
 
@@ -56,9 +57,20 @@ Response:
 ##Group API
 ###Group object
 {  
-    id: int,  
-    desc: string,  
-
+    id: String,  
+    name: String,
+	desc: String,
+	members: [{
+		id: String,
+		email: String,
+		firstname: String,
+		lastname: String
+	}],
+	admins: [String], //Strings are IDs, admins are also in members list
+	questions: [{
+		id: String,
+		question: String
+	}]
 }
 
 ###POST /group/join/groupID
@@ -68,7 +80,7 @@ Join a given group
 Create a group (if allowed)
 
 ###POST /group/info/groupID
-Get info for given group
+- Group Object
 
 ###POST /group/update/groupID
 Update a given group
