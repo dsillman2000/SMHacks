@@ -32,7 +32,13 @@
                         <a href="groups.html">My Groups</a>
                     </li>
                 </ul>
+                
             </div>
+            <ul class="navbar-nav mr-right">
+            <li class="nav-item active">
+                <button id="adduser" class="btn btn-primary">+ Add User</button>
+            </li>
+        </ul>
         </nav>
         
     <div class="fullheight">
@@ -257,6 +263,10 @@ html, body {
             }
         });
 
+        $('#adduser').click(function() {
+            window.location.replace('adduser.html?groupId=' + groupId);
+        });
+        
     });
 
     function clearQuestions() {
