@@ -2,7 +2,7 @@ var route = require('express').Router();
 
 var auth = function(req, res, next){
   if (!req.isAuthenticated())
-  	res.sendStatus(401);
+  	res.redirect('/login');
   else
   	next();
 };

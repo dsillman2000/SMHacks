@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "async": "^2.0.1",
+//    "bluebird": "^3.4.7",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.13.1",
     "cookie-parser": "^1.4.3",
@@ -12,7 +13,7 @@
     "express-mysql-session": "^1.1.1",
     "express-session": "^1.14.0",
     "morgan": "^1.7.0",
-    "mysql": "^2.1.1",
+    "mongoose": "^4.0.2",
     "npm": "^3.10.6",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

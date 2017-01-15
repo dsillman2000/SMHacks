@@ -1,4 +1,4 @@
-// config/passport.js
+var User = require('../db/models/user');
 
 var users = [{
    
@@ -9,13 +9,12 @@ var users = [{
    lastname: 'smith'
     
 }, {
-   
+       
    id: 'test id2',
    email: 'testemail2',
    password: 'has2h',
    firstname: 'bob2',
    lastname: 'smith2'
-    
 }];
 
 
@@ -50,15 +49,9 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-//      connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
-//        done(err, rows[0]);
-//      });
-
-        for (user in users) {
-            if (user.id == id) {
-                return user;
-            }
-        }
+        User.findOne({'id': id}, function(err, user) {
+			done(err, user);
+        });
     });
 
     // =========================================================================
@@ -76,67 +69,59 @@ module.exports = function(passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, username, password, done) {
+            console.log('body: ' + JSON.stringify(req.body));
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
 
-            for (user in users) {
-                if (user.email == username) {
-                    returndone(null, false);
-                }
-            }
-            
-            var hashedPassword = bcrypt.hashSync(password, null, null);
-
-            var newUser = {
-    
-               id: users.length,
-               email: username,
-               password: hashedPassword,
-               firstname: req.body.firstname,
-               lastname: req.body.lastname
-                
-            };
-            users.push(user);
-            
-            return done(null, newUser);
-
-//            connection.query("SELECT * FROM users WHERE email = ?",[username], function(err, rows) {
-//                if (err)
-//                    return done(err);
-//                if (rows.length) { //User already exists
-//                    return done(null, false);
-//                } else {
-                    // if there is no user with that username
-                    // create the user
-//                    var hashedPassword = bcrypt.hashSync(password, null, null);
+//            for (user in users) {
+//                if (user.email == username) {
+//                    returndone(null, false);
+//                }
+//            }
+//            
+//            var hashedPassword = bcrypt.hashSync(password, null, null);
 //
-//                    var newUser = {
-//   
-//                       id: users.length,
-//                       email: username,
-//                       password: hashedPassword,
-//                       firstname: req.body.firstname,
-//                       lastname: req.body.lastname
-//                        
-//                    };
-//                    users.push(user);
-//                    
+//            var newUser = {
+//    
+//               id: users.length,
+//               email: username,
+//               password: hashedPassword,
+//               firstname: req.body.firstname,
+//               lastname: req.body.lastname
+//                
+//            };
+//            users.push(user);
+            
+//            return done(null, newUser);
+
+            console.log("singup starting");
+            User.findOne({'email': username}, function(err, user) {
+                if (err)
+                    return done(err);
+                if (user) { //User already exists
+                    return done(null, false, 'User already exists');
+                } else {
+                    console.log("Creating and saving user");
+                     //if there is no user with that username
+                     //create the user
+                    var hashedPassword = bcrypt.hashSync(password, null, null);
+
+                    var newUser = User({
+                    	email: username,
+                        password: hashedPassword,
+                        firstname: req.body.firstname,
+                        lastname: req.body.lastname
+                    });
+                    
 //                    return done(null, newUser);
 
-//                    var insertQuery = "INSERT INTO users ( name, email, password ) values (?,?,?)";
-//
-//                    connection.query(insertQuery,[req.body.name, username, hashedPassword], function(err, rows) {
-//                        var newUser = {
-//                          name: req.body.name,
-//                          email: username,
-//                          isadmin: 0,
-//                          id: rows.insertId,
-//                        };
-//
-//                        return done(null, newUser);
-//                    });
-//                }
-//            });
+                    newUser.save(function(err) {
+                        console.log("saved user");
+                        console.log(newUser);
+                        return done(null, newUser);
+                    });
+                }
+            });
         })
     );
 
@@ -149,52 +134,43 @@ module.exports = function(passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, username, password, done) { // callback with email and password from our form
-            console.log('Username: ' + username);
           
-            var loginUser = null;
-          
-            for (user in users) {
-                if (user.email == username) {
-                    loginUser = user;
-                    break;
-                }
-            }
-            
-            if (!user)
-                return done(null, false);
-            
-            if (!bcrypt.compareSync(password, loginUser.password))
-                return done(null, false);
-
-            return done(null, loginUser);
-          
-          
-          
-          
-            
-            
-//            connection.query("SELECT * FROM users WHERE email = ?",[username], function(err, rows){
-//                if (err)
-//                    return done(err);
-//                if (!rows.length) { //User not found
-//                    return done(null, false);
+//            var loginUser = null;
+//          
+//            for (user in users) {
+//                if (user.email == username) {
+//                    loginUser = user;
+//                    break;
 //                }
+//            }
+//            
+//            if (!user)
+//                return done(null, false);
+//            
+//            if (!bcrypt.compareSync(password, loginUser.password))
+//                return done(null, false);
 //
-//                // if the user is found but the password is wrong
-//                if (!bcrypt.compareSync(password, rows[0].password))
-//                    return done(null, false); // create the loginMessage and save it to session as flashdata
-//
-//                // all is well, return successful user
-//                var user = {
-//                  name: rows[0].name,
-//                  email: rows[0].email,
-//                  isadmin: rows[0].isadmin,
-//                  issuperadmin: rows[0].issuperadmin,
-//                  id: rows[0].id
-//                };
-//                // console.log("user: " + JSON.stringify(rows[0]));
-//                return done(null, user);
-//            });
+//            return done(null, loginUser);
+          
+          
+          
+          
+            
+            
+            User.findOne({'email': username}, function(err, user) {
+                if (err)
+                    return done(err);
+                if (!user) { //User not found
+                    return done(null, false, 'User not found');
+                }
+
+                // if the user is found but the password is wrong
+                if (!bcrypt.compareSync(password, user.password))
+                    return done(null, false, 'Wrong Password');
+                
+                console.log('[USER] login from user with email' + user.email);
+                return done(null, user);
+            });
         })
     );
 

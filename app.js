@@ -1,24 +1,3 @@
-//var express = require('express');
-//var app = express();
-//
-//
-//app.use(express.static('public'))
-//
-//app.use('/api', require('./pathtest.js'));
-//
-//var http = require('http');
-//var server = http.createServer(app);
-//
-//var port = process.env.PORT || 3000;
-//server.listen(port, function() {
-//	console.log("server up and running on port " + port);
-//});
-
-
-
-
-
-
 var express = require('express');
 // var http = require('http');
 var path = require('path');
@@ -78,6 +57,13 @@ var session  = require('express-session');
 
 // required for passport
 // using mysql-session bc better, no memory leaks (default is not good)
+
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+//assert.equal(query.exec().constructor, global.Promise);
+mongoose.connect('mongodb://socratik:verysecure@ds111479.mlab.com:11479/socratik');
+
+
 app.use(session({
   key: 'mysecurekey',
 	secret: 'n5dQg3Tgc0kfd03e',

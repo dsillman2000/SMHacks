@@ -2,10 +2,10 @@
 module.exports = function(app, passport) {
 
   // route to test if the user is logged in or not
-  app.get('/loggedin', function(req, res) {
+  app.get('/api/v1/account/loggedin', function(req, res) {
     console.log("User is loggged in? " + (req.isAuthenticated() ? "Yes - username: " + req.user.email : "No"));
-    if (req.user) req.user.password = undefined;
-    res.send(req.isAuthenticated() ? req.user : '0');
+//    if (req.user) req.user.password = undefined;
+    res.json({ success: req.isAuthenticated() });
   });
 
   // route to log in
@@ -16,8 +16,8 @@ module.exports = function(app, passport) {
 
           if (!user) {
               //Authentication failed
-              console.log("Auth failed");
-              return res.sendStatus(401);
+              console.log("Auth failed: " + info);
+              return res.json({success: false, error: info });
           }
           //Authentication successful
           req.logIn(user, function(err) {
@@ -62,8 +62,8 @@ module.exports = function(app, passport) {
           if (err) { return next(err); }// Error 500
 
           if (!user) {
-              //Authentication failed, user already exists
-              return res.sendStatus(401);
+              console.log("Registration failed - " + info);
+              return res.json({success: false, error: info });
           }
           //Authentication successful
           req.logIn(user, function(err) {
