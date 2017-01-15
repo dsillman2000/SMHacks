@@ -73,17 +73,17 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p class="questionbody">So I was reading this assignment I got in English, and I thought to myself, "This name is so ridiculous, how could
+        <p id="qbody" class="questionbody">So I was reading this assignment I got in English, and I thought to myself, "This name is so ridiculous, how could
             a book called 'Huckleberry Finn' even exist in the first place?" Can anyone help me find some record of it on
             the internet or something so I know that I'm not going completely crazy?</p>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p class="details">Posted by Test Testson at 22:53 on Saturday, January 14</p>
+        <p id="qdetails" class="details">Posted by Test Testson at 22:53 on Saturday, January 14</p>
     </div>
 </div>
-<div id="" class="row fullheight">
+<div class="row fullheight">
     <table id="answertable">
         <tbody>
             <tr class="arow">
@@ -217,6 +217,7 @@ html, body {
 
     $(document).ready(function () {//call page with 
         $.post("/api/v1/account/loggedin", function (data, status) {
+            console.log(data);
             if (!data.success) {
                 //window.location.replace("index.html");
             }
@@ -225,21 +226,33 @@ html, body {
 
         var url = window.location.href;
 
-        var splitURL = url.slice(url.indexOf("?")).split('=');
+        var splitURL = url.slice(url.indexOf("?")).split('&');
         if (splitURL.length >= 2) {
-            groupId = splitURL[1].replace("&questionId", "");
+            groupId = splitURL[0].split('=')[1];
 
-            if (splitURL.length >= 4) {
-                questionId = splitURL[3];
+            if (splitURL.length >= 2) {
+                questionId = splitURL[1].split('=')[1];
             }
 
-        } else {
-            window.location.replace('/groups.html');
+        } else {//Display first question in group
+            //window.location.replace('/groups.html');
         }
 
         clearQuestions();
         getQuestions();
 
+        $.post("/api/v1/group/" + groupId + "/questions", {}, function(data, status) {
+            for (var i = 0; i < data.questions.length; ++i) {
+                if (data.questions._id == questionId) {
+                    clearComments();
+                    setQuestion(data.questions[i]);
+                    for (var j = 0; j < data.questions[i].comments.length; ++j) {
+                        addComment(data.questions[i].comments[j]);
+                    }
+                    break;
+                }
+            }
+        });
 
     });
 
@@ -262,7 +275,6 @@ html, body {
 
     function getQuestions() {//get and render questions
         $.post("/api/v1/group/" + groupId + "/questions", function (data, status) {
-            console.log(data.questions);
             for (var i = 0; i < data.questions.length; ++i) {
                 addQuestion(data.questions[i]);
             }
@@ -274,16 +286,48 @@ html, body {
             <td><a class="question" href="hub.html?groupId=GROUPID&questionId=QID">QUESTION</a></td>
         </tr>`;
 
-        question = question.replace("GROUPID", groupId).replace("QUESTION", q.question).replace("QID", q.id);
+        question = question.replace("GROUPID", groupId).replace("QUESTION", q.question).replace("QID", q._id);
         $('#qbody').append(question);
     }
 
     function clearComments() {
-
+        $('#answertable').html("");
     }
 
-    function addComment() {
+    function setQuestion(q) {
+        $('#questionstatement').text(q.question);
+        $('#qbody').text(q.desc);
+        $('#qdetails').text('Posted by Bob Bobson at 23:00 on Saturday, January 14');
+        for (var i = 0; i < q.comments.length; ++i) {
+            addComment(q.comments[i]);
+        }
+    }
 
+    function addComment(c) {
+        var comment = `
+        <tr class="arow">
+                <td>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="answer">ANSWERBODY</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="answerdetails">Posted by FIRSTNAME LASTNAME at TIMEOFDAY on DATE</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>`;
+        comment = comment.replace("ANSWERBODY", c.comment);
+        comment = comment.replace("FIRSTNAME", c.firstName);
+        comment = comment.replace("LASTNAME", c.lastName);
+        var time = new Date(c.date);
+        var timeofday = time.getHours() + ":" + time.getMinutes;
+        var date = time.getDay() + ', ' + time.getMonth() + ' ' + time.getUTCDate() + ', ' + time.getFullYear();
+        comment = comment.replace("TIMEOFDAY", timeofday);
+        comment = comment.replace("DATE", date);
+        $('#answertable').first().append(comment);
     }
 </script>
 
