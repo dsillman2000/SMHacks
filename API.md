@@ -120,18 +120,20 @@ Get available groups for a given user
 ##Question API
 ###Question Object
 {
-	name: String,
-	description: String,
-	members: [{
-		id: mongoose.Schema.Types.ObjectId,
-		email: String,
-		firstname: String,
-		lastname: String
-	}],
-	admins: [mongoose.Schema.Types.ObjectId],
-	questions: [{
-		id: mongoose.Schema.Types.ObjectId,
-		question: String
+	groupId: String,
+	question: String,
+	user: {
+		userId: String,
+		firstName: String,
+		lastName: String
+	},
+	date: Number,
+	comments: [{
+		comment: String,
+		date: Number,
+		userId: String,
+		firstName: String,
+		lastName: String
 	}]
 }
 
