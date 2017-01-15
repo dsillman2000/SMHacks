@@ -2,18 +2,32 @@
 <html>
 
 <head>
-    <title>Soctratik Register Test Form</title>
+    <title>Socratik</title>
+    <link rel="stylesheet" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
 <body>
-    <form>
-        <input id="email" type="email" placeholder="Email"/>
-        <input id="password" type="password" placeholder="Password"/>
-        <input id="firstname" type="text" placeholder="First Name"/>
-        <input id="lastname" type="text" placeholder="Last Name"/>
-        <input id="login" type="button" value="Login" />
-    </form>
+    <div class="col-md-3" style="height: 200%">
+        <div class="purple" style="padding:3%; font-size:145%">
+            <div class="text-center">
+                <b>Socratik Question Board</b>
+            </div>
+        </div>
+        <div class="white" style="padding: 2%;">
+            <b>Evening</b>
+            <hr>
+            <b>What is Huck Finn about?</b>
+            <hr>
+        </div>
+        <div class="blue" style="padding: 2%;">
+            <b>Is Gatsby a murderer?</b>
+        </div>
+        <div class="white fullheight">
+
+        </div>
+    </div>
 </body>
 
 <style>
@@ -21,18 +35,7 @@
 </style>
 
 <script>
-    $(document).ready(function() {
-        $('#login').click(function() {
-            $.post("/api/v1/account/register", {
-                email: $('#email').val(),
-                password: $('#password').val(),
-                firstname: $('#firstname').val(),
-                lastname: $('#lastname').val()
-            }, function(data, status) {
-                console.log(data);
-            });
-        });
-    });
+
 </script>
 
 </html>
