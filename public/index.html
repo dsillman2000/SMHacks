@@ -2,61 +2,180 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-    crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 
 <body>
-  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Socratik</a>
+        <a class="navbar-brand" href="#">Socratik</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-  <div class="container">
+    <!--Start main page -->
+
+    <br>
+    <br>
     <div class="row">
-
+        <div class="col-sm-8 offset-sm-2">
+            <h1 class="text-center title">Welcome to <span class="bold">Socratik</span></h1>
+        </div>
     </div>
     <div class="row">
-      <div class="col-sm-12">
-        <h1 class="text-center">Welcome to Soctratik</h1>
-      </div>
+        <br>
+        <div class="col-sm-4 offset-sm-4">
+            <br>
+            <div class="row card">
+                <div class="col-sm-10 offset-sm-1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <br>
+                            <h2 class="text-center">Log In</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form id="login">
+                                <div class="form-group">
+                                    <label for="loginemail">Email Address:&nbsp;&nbsp;</label>
+                                    <input type="email" class="form-control" id="loginemail" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="loginpassword">Password:&nbsp;&nbsp;</label>
+                                    <input type="password" class="form-control" id="loginpassword" />
+                                </div>
+                                <div class="form-group text-center">
+                                    <button id="loginbutton" type="submit" class="btn btn-primary">Log In</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- OR -->
+            <br>
+            <div class="row card">
+                <div class="col-sm-10 offset-sm-1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <br>
+                            <h2 class="text-center">Register</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <form id="register">
+                                <div class="form-group">
+                                    <label for="registeremail">Email Address:&nbsp;&nbsp;</label>
+                                    <input type="email" class="form-control" id="registeremail" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerpassword">Password:&nbsp;&nbsp;</label>
+                                    <input type="password" class="form-control" id="registerpassword" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerfirstname">First Name:&nbsp;&nbsp;</label>
+                                    <input type="text" class="form-control" id="registerfirstname" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="registerlastname">Last Name:&nbsp;&nbsp;</label>
+                                    <input type="text" class="form-control" id="registerlastname" />
+                                </div>
+                                <div class="form-group text-center">
+                                    <button id="registerbutton" type="submit" class="btn btn-primary">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <br>
 
-  </div>
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </body>
+<script>
+    $(document).ready(function() {
+        $('#loginbutton').click(function(e) {
+            e.preventDefault();
+            $.post("/api/v1/account/login", {
+                email: $('#loginemail').val(),
+                password: $('#loginpassword').val()
+            }, function(data, status) {
+                console.log(data);
+            });
+        });
+
+        $('#registerbutton').click(function(e) {
+            e.preventDefault();
+            $.post("/api/v1/account/register", {
+                email: $('#registeremail').val(),
+                password: $('#registerpassword').val(),
+                firstname: $('#registerfirstname').val(),
+                lastname: $('#registerlastname').val()
+            }, function(data, status) {
+                console.log(data);
+            });
+        });
+    });
+</script>
 <style>
-    h1 {
-      font-weight: 200;
+    @font-face {
+        font-family: HelveticaNeueThin;
+        src: url('/css/fonts/HelveticaNeueThin.ttf') format('truetype'), url('/css/fonts/HelveticaNeueThin.otf') format('otf'), url('/css/fonts/HelveticaNeueThin.eot') format('eot'), url('/css/fonts/HelveticaNeueThin.woff') format('woff');
     }
-  </style>
+    
+    @font-face {
+        font-family: HelveticaNeueThin;
+        src: url('/css/fonts/HelveticaNeueMedium.ttf') format('truetype'), url('/css/fonts/HelveticaNeueMedium.otf') format('otf'), url('/css/fonts/HelveticaNeueMedium.eot') format('eot'), url('/css/fonts/HelveticaNeueMedium.woff') format('woff');
+        font-weight: bold;
+    }
+    
+    h1,
+    h2,
+    h3 {
+        font-family: "HelveticaNeueThin";
+        font-weight: 200;
+    }
+    
+    body {
+        background-image: url("/css/emptyClassroom.jpg");
+    }
+    
+    .white {
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px) grayscale(80%) brightness(80%);
+    }
+    
+    .spacer {
+        line-height: 2em;
+    }
+    
+    .title {
+        color: white;
+        font-size: 4em;
+    }
+    
+    .bold {
+        font-weight: bold;
+    }
+</style>
 
 </html>
