@@ -99,20 +99,14 @@ route.post('/:groupId/questions/create', function(req, res) {
   
   var newQuestion = Question({
   	groupId: req.params.groupId,
-  	question: String,
+  	question: req.body.question,
   	user: {
-  		userId: String,
-  		firstName: String,
-  		lastName: String
+  		userId: req.user.id,
+  		firstname: req.user.firstname,
+  		lastname: req.user.lastname
   	},
-  	date: Number,
-  	comments: [{
-  		comment: String,
-  		date: Number,
-  		userId: String,
-  		firstName: String,
-  		lastName: String
-  	}]
+  	date: Date.now(),
+  	comments: []
   });
   
   Question.find({ 'groupId': req.params.groupId }, function(err, questions) {
