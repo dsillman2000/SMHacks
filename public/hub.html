@@ -5,6 +5,7 @@
     <title>Socratik</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
         crossorigin="anonymous">
 </head>
@@ -255,11 +256,28 @@ html, body {
 }
 </style>
 
+<script src="/socket.io/socket.io.js"></script>
 <script>
     var groupId;
     var questionId;
     var questions;
 
+    var url = window.location.href;
+
+    var splitURL = url.slice(url.indexOf("?")).split('&');
+    if (splitURL.length >= 1) {
+        groupId = splitURL[0].split('=')[1];
+
+        if (splitURL.length >= 2) {
+            questionId = splitURL[1].split('=')[1];
+        } else {
+            questionId = null;
+        }
+
+    } else {//Display first question in group
+        //window.location.replace('/groups.html');
+    }
+    
     $(document).ready(function () {//call page with 
         $.get("/api/v1/account/loggedin", function (data, status) {
             if (!data.success) {
@@ -268,21 +286,6 @@ html, body {
         });
 
 
-        var url = window.location.href;
-
-        var splitURL = url.slice(url.indexOf("?")).split('&');
-        if (splitURL.length >= 1) {
-            groupId = splitURL[0].split('=')[1];
-
-            if (splitURL.length >= 2) {
-                questionId = splitURL[1].split('=')[1];
-            } else {
-                questionId = null;
-            }
-
-        } else {//Display first question in group
-            //window.location.replace('/groups.html');
-        }
 
         clearQuestions();
         getQuestions();
@@ -369,8 +372,8 @@ html, body {
                 </td>
             </tr>`;
         comment = comment.replace("ANSWERBODY", c.comment);
-        comment = comment.replace("FIRSTNAME", c.firstName);
-        comment = comment.replace("LASTNAME", c.lastName);
+        comment = comment.replace("FIRSTNAME", c.firstname);
+        comment = comment.replace("LASTNAME", c.lastname);
         var time = new Date(c.date);
         var timeofday = time.getHours() + ":" + time.getMinutes;
         var date = time.getDay() + ', ' + time.getMonth() + ' ' + time.getUTCDate() + ', ' + time.getFullYear();
@@ -380,12 +383,39 @@ html, body {
     }
 
 
+    var socket = io();
+
+    //You are not logged in
+    socket.on('logout', function() {
+    	window.location.replace('/index.html');
+    });
+    
+    socket.on('init', function() {
+    	socket.emit('mygroup', groupId);
+    });
+    
+    socket.on('message', function(data) {
+        console.log('message received');
+    	addComment({
+            comment: data.message,
+            date: data.date,
+            firstname: 'test',
+            lastname: 'test'
+        });
+    });
 
 
     $('textarea').keyup(function(e){
         if(e.keyCode == 13) { //enter key pressed
             var comment =  $('#comment').val();
             $('#comment').val('');
+//            socket.emit('chat message', comment, groupId);
+            addComment({
+            comment: comment,
+            date: Date.now(),
+            firstName: 'test',
+            lastname: 'test'
+        });
         }
     });
 </script>
