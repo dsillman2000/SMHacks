@@ -95,11 +95,12 @@ route.post('/:groupId/questions', function(req, res) {
 
 route.post('/:groupId/questions/create', function(req, res) {
   
-  if (!req.body.question) res.json({ success: false, error: "Pleave provide a question" });
+  if (!req.body.question || !req.body.description) res.json({ success: false, error: "Pleave provide a question" });
   
   var newQuestion = Question({
   	groupId: req.params.groupId,
   	question: req.body.question,
+    description: req.body.description,
   	user: {
   		userId: req.user.id,
   		firstname: req.user.firstname,
@@ -109,9 +110,9 @@ route.post('/:groupId/questions/create', function(req, res) {
   	comments: []
   });
   
-  Question.find({ 'groupId': req.params.groupId }, function(err, questions) {
+  newQuestion.save(function(err) {
     if (err) res.json({ success: false, error: err });
-    else res.json({ success: false, questions: questions, error: err });
+    else res.json({ success: true, id: newQuestion.id, error: err });
   });
   
 });

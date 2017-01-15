@@ -15,8 +15,8 @@
     <div class="row" style=" font-size:250%; text-align:center;">
         <div class="col-sm-10 offset-sm-1">
             <div class="card">
-                <div class="row">
-                    <div class="col-sm-4">
+                <div class="row" id="mygroups">
+<!--                    <div class="col-sm-4">
                         <a href="javascript:window.location.replace('/hub.html');">
                         <img class="hoverlight" src="/css/classIcon.png" style="width:70%; margin: 15% 15% 3%;">
                         </a>
@@ -33,7 +33,7 @@
                         <img class="hoverlight" src="/css/classIcon.png" style="width:70%; margin: 15% 15% 3%;">
                         </a>
                         AP Literature
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -68,6 +68,28 @@
 </style>
 
 <script>
+
+$(document).ready(function () {
+    $.get("/api/v1/account/groups", function (data, status) {
+        console.log(data);
+        
+        if (data.success) {
+            
+            for (var i = 0; i < data.groups.length; i++) {
+                $('#mygroups').append('<div class="col-sm-4">'
+                     +   '<a href="hub.html?groupId=' + data.groups[i]._id + '">'
+                     +   '<img class="hoverlight" src="/css/classIcon.png" style="width:70%; margin: 15% 15% 3%;"></a>'
+                     + data.groups[i].name
+                     + '</div>');
+            }
+            
+        } else {
+            window.location.replace("/index.html");
+        }
+        
+    });
+});
+
 
 </script>
 

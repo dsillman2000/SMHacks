@@ -23,6 +23,16 @@ route.get('/apicall/:key', function(req, res) {
 
 });
 
+route.get('/account/groups', function(req, res) {
+  
+  Group.find({'members.id': req.user.id}).exec(function(err, groups) {
+     if (err) res.send({ success: false, error: err});
+     else if (!groups) res.send({ success: true, groups: []});
+     else res.send({ success: true, groups: groups });
+  });
+  
+});
+
 
 route.post('/questions')
 
