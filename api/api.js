@@ -24,6 +24,8 @@ route.get('/apicall/:key', function(req, res) {
 });
 
 
+route.post('/questions')
+
 route.use('/group', require('./groups'));
 
 module.exports = route;
