@@ -38,7 +38,7 @@
         <div class="row fullheight">
             <!--Sidebar-->
             <div class="col-md-3 fullheight">
-                <div class="card fullheight" style="margin: 10px; height:97%;">
+                <div class="card fullheight" style="margin: 10px; height:90%;">
 <br>
 <table id="questions">
     <tbody id="qbody">
@@ -47,7 +47,7 @@
                 <h2 class="questiontitle" href="#">Questions</h2>
 
             </td>
-            <td><button class="btn btn-primary" id="newquestion">+</button></td>
+            <td><button class="btn btn-default" id="newquestion">+</button></td>
         </tr>
         <tr class="qrow">
             <td><a class="question" href="#">Was Huckleberry Finn a real book?</a></td>
@@ -158,7 +158,11 @@
         </tbody>
     </table>
 </div>
+
 </div>
+</div>
+<div id="dialog">
+    <textarea id="comment" rows="2" type="text" class="form-control" placeholder="Comment"></textarea>
 </div>
 </div>
 </div>
@@ -202,10 +206,16 @@ h1, h2, h3 {
     color: rgb(113, 113, 113);
 }
 .qrow {
+    width: 100%;
     margin-bottom: 1em;
     height: 50px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid #ccc;
 }
+
+.qrow td {
+    padding-left: 15px;
+}
+
 .question {
     width: 100%;
 }
@@ -231,6 +241,17 @@ html, body {
 }
 #answers {
     background-color: white;
+}
+
+#dialog {
+    width: 70%;
+    margin-left:27%;
+    padding: 10px;
+    position: fixed;
+/*    height: 100px;*/
+    background-color: #ccc;
+    box-shadow: 0px 0px 5px #888888;
+    bottom: 0px;
 }
 </style>
 
@@ -309,6 +330,16 @@ html, body {
     function addComment() {
 
     }
+
+
+
+
+    $('textarea').keyup(function(e){
+        if(e.keyCode == 13) { //enter key pressed
+            var comment =  $('#comment').val();
+            $('#comment').val('');
+        }
+    });
 </script>
 
 </html>
