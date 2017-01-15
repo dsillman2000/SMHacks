@@ -1,23 +1,23 @@
+@font-face{
+    font-family: HelveticaNeueThin;
+    src: url('/fonts/HelveticaNeueThin.ttf');
+}
+@font-face{
+    font-family: HelveticaNeueLt;
+    src: local('fonts/HelveticaNeueLt.tff');
+}
 body.blue {
     background-color: #88AAFF;
-    font-family: HelveticaNeueThin;
+    font-family: 'HelveticaNeueThin';
     color: #DDD
 }
 body.purple {
     background-color: #9955FF;
-    font-family: 'HelveticaNeueThin';
+    font-family: "HelveticaNeueThin";
     color: #DDD
 }
 body.unfilled {
     background-color:#DDD;
     font-family:"HelveticaNeueLt";
-    color: #333
-}
-@font-face{
-    font-family: 'HelveticaNeueThin';
-    src: url("/css/fonts/HelveticaNeueThin.ttf");
-}
-@font-face{
-    font-family: HelveticaNeueLt;
-    src: local('fonts/HelveticaNeueLt.tff');
+    color: #333;
 }
