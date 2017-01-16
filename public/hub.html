@@ -11,32 +11,32 @@
 </head>
 
 <body class="fullheight">
-     <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="background-color:#AA88FF">
+     <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="background-color:#EEE">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" style="color:white;font-family:'HelveticaNeueThin'" href="#"><b>Socratik</b></a>
+            <a class="navbar-brand" style="font-family:'HelveticaNeueThin'" href="#"><b>Socratik</b></a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a href="#"style="color:white;font-family:'HelveticaNeueThin'">Home</a>
+                    <a href="#"style="font-family:'HelveticaNeueThin'">Home</a>
                 </li>
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a href="about.html"style="color:white;font-family:'HelveticaNeueThin'">About</a>
+                    <a href="about.html"style="font-family:'HelveticaNeueThin'">About</a>
                 </li>
                 &nbsp;&nbsp;&nbsp;
                 <li class="nav-item">
-                    <a href="groups.html"style="color:white;font-family:'HelveticaNeueThin'">My Groups</a>
+                    <a href="groups.html"style="font-family:'HelveticaNeueThin'">My Groups</a>
                 </li>
             </ul>
 
         </div>
         <ul class="navbar-nav mr-right">
             <li class="nav-item active">
-                <button id="adduser" class="btn btn-danger">+ Add User</button>
+                <button id="adduser" class="btn btn-primary">+ Add User</button>
             </li>
         </ul>
     </nav>
@@ -94,7 +94,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p id="qbody" class="questionbody"></p>
+        <p id="qdesc" class="questionbody"></p>
     </div>
 </div>
 <div class="row">
@@ -174,11 +174,22 @@ h1, h2, h3 {
     width: 100%;
     margin-bottom: 1em;
     height: 50px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ddd;
 }
 
 .qrow td {
-    padding-left: 15px;
+    padding: 10px 15px;
+    
+}
+
+#qdesc {
+    margin-bottom: 4px;
+    color: #555;
+}
+
+#qdetails {
+    font-size: 14px;
+    margin-bottom: 0px;
 }
 
 .question {
@@ -218,9 +229,10 @@ html, body {
     padding: 10px;
     position: fixed;
 /*    height: 100px;*/
-    background-color: #ccc;
-    box-shadow: 0px 0px 5px #888888;
+    background-color: #ddd;
+    box-shadow: 0px 0px 9px #444;
     bottom: 0px;
+    border-radius: 4px;
 }
 </style>
 
@@ -329,7 +341,7 @@ html, body {
 
     function addQuestion(q) {
         var question = `<tr class="qrow">
-            <td><a class="question" href="hub.html?groupId=GROUPID&questionId=QID">QUESTION</a></td>
+            <td colspan="2"><a class="question" href="hub.html?groupId=GROUPID&questionId=QID">QUESTION</a></td>
         </tr>`;
 
         question = question.replace("GROUPID", groupId).replace("QUESTION", q.question).replace("QID", q._id);
@@ -353,7 +365,7 @@ html, body {
     function setQuestion(q) {
         
         $('#questionstatement').text(q.question);
-        $('#qbody').text(q.desc);
+        $('#qdesc').text(q.description);
         var name = q.user.userId;
         for (var i = 0; i < users.length; ++i) {
             if (users[i].id == name) {
